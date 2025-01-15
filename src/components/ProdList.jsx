@@ -13,7 +13,19 @@ function Prod() {
   return (
     <section className="" id="produtos">
       <h2 className="font-bold text-center">Produtos</h2>
-      <Carousel className="w-full max-w-xs mx-auto">
+      <Carousel className="w-full max-w-lg mx-auto lg:max-w-4xl max-sm:overflow-hidden" opts={{
+        slidesToScroll: 1,
+        slidesToShow: 2,
+        infinite: false,
+        responsive: [
+          {
+            breakpoint: 640,
+            settings: {
+              slidesToShow: 1,
+            },
+          },
+        ],
+      }}>
       <CarouselContent>
         {Array.from({ length: 6 }).map((_, index) => (
           <CarouselItem key={index} className="basis-1/2">

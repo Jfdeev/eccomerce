@@ -16,10 +16,11 @@ function Header() {
                 <a href="#meuPedidos">Area do Dono</a>
 
                 <div className="cursor-pointer">
-                    <Link to="/carrinho"></Link>
-                    <span class="material-symbols-outlined">
-                        shopping_cart
-                    </span>
+                    <Link to="/carrinho">
+                        <span class="material-symbols-outlined">
+                            shopping_cart
+                        </span>
+                    </Link>
                 </div>
             </nav>
         </header>
