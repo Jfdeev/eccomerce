@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../assets/logo.jpeg";
+import { Link } from "react-router-dom";
 
 function Header() {
     
@@ -13,9 +14,13 @@ function Header() {
                 <a href="#home">Home</a>
                 <a href="#produtos">Produtos</a>
                 <a href="#meuPedidos">Area do Dono</a>
-                <span class="material-symbols-outlined">
-                    shopping_cart
-                </span>
+
+                <div className="cursor-pointer">
+                    <Link to="/carrinho"></Link>
+                    <span class="material-symbols-outlined">
+                        shopping_cart
+                    </span>
+                </div>
             </nav>
         </header>
     )
