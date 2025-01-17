@@ -7,9 +7,12 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
-import { Routes, Route } from 'react-router-dom';
+import ProductCard from "./products/product.jsx";
+import { clothingStoreDatabase } from "../constants/data.js";
 
 function Prod() {
+  const products = clothingStoreDatabase.products;
+
   return (
     <section className="" id="produtos">
       <h2 className="font-bold text-center">Produtos</h2>
@@ -42,50 +45,17 @@ function Prod() {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 p-6 cursor-pointer">
-        <div className="bg-zinc-100 p-4 rounded-lg">
-          <h3>Produto 1</h3>
-          <p>Descrição do produto 1</p>
-          <button className="bg-zinc-900 text-zinc-50 p-2 rounded-md hover:bg-zinc-800">
-            Comprar
-          </button>
-        </div>
-        <div className="bg-zinc-100 p-4 rounded-lg cursor-pointer">
-          <h3>Produto 2</h3>
-          <p>Descrição do produto 2</p>
-          <button className="bg-zinc-900 text-zinc-50 p-2 rounded-md hover:bg-zinc-800">
-            Comprar
-          </button>
-        </div>
-        <div className="bg-zinc-100 p-4 rounded-lg cursor-pointer">
-          <h3>Produto 3</h3>
-          <p>Descrição do produto 3</p>
-          <button className="bg-zinc-900 text-zinc-50 p-2 rounded-md hover:bg-zinc-800">
-            Comprar
-          </button>
-        </div>
-        <div className="bg-zinc-100 p-4 rounded-lg cursor-pointer">
-          <h3>Produto 4</h3>
-          <p>Descrição do produto 4</p>
-          <button className="bg-zinc-900 text-zinc-50 p-2 rounded-md hover:bg-zinc-800">
-            Comprar
-          </button>
-        </div>
-        <div className="bg-zinc-100 p-4 rounded-lg cursor-pointer ">
-          <h3>Produto 5</h3>
-          <p>Descrição do produto 5</p>
-          <button className="bg-zinc-900 text-zinc-50 p-2 rounded-md hover:bg-zinc-800">
-            Comprar
-          </button>
-        </div>
-        <div className="bg-zinc-100 p-4 rounded-lg cursor-pointer">
-          <h3>Produto 6</h3>
-          <p>Descrição do produto 6</p>
-          <button className="bg-zinc-900 text-zinc-50 p-2 rounded-md hover:bg-zinc-800">
-            Comprar
-          </button>
-        </div>
-      </div>
+     <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto p-6 cursor-pointer">
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          title={product.name}
+          description={product.description}
+          price={product.price}
+          id={product.id}
+        />
+      ))}
+     </div>
     </section>
   );
 }

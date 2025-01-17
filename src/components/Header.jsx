@@ -13,7 +13,10 @@ function Header() {
                 </div>
                 <a href="#home">Home</a>
                 <a href="#produtos">Produtos</a>
-                <a href="#meuPedidos">Area do Dono</a>
+
+                <Link to="/dono">
+                    Area do Dono
+                </Link>
 
                 <div className="cursor-pointer">
                     <Link to="/carrinho">

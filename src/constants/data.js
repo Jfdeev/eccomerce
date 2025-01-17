@@ -25,3 +25,5 @@ const clothingStoreDatabase = {
         { id: 4, order_id: 2, product_id: 3, quantity: 1, price: 79.99 },
     ]
 };
+
+export { clothingStoreDatabase };

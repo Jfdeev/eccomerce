@@ -1,20 +1,19 @@
-import Header from "./components/Header"
-import Prod from "./components/ProdList"
-import Footer from "./components/Footer"
-import Main from "./components/main/Main"
 import Routes from "./routes/Routes"
 import { BrowserRouter } from "react-router-dom";
+import { CartProvider } from "./constants/cartContext";
 
 
 function App() {
 
   return (
     <>
-      <BrowserRouter>
+    <BrowserRouter>
+      <CartProvider>
         <Routes />
-      </BrowserRouter>
+      </CartProvider>
+    </BrowserRouter>
     </>
   )
 }
 
-export default App
+export default App;
