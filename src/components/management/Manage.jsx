@@ -1,17 +1,40 @@
 import React from "react";
 import { Table, TableHeader, TableHead, TableBody, TableRow, TableCell } from "../ui/table.tsx";
+import { Dialog } from "../ui/dialog.tsx";
 import { Link } from "react-router-dom";
+import { Search, PlusCircle } from "lucide-react";
 import { Button } from "../ui/button.tsx";
+import { clothingStoreDatabase } from "../../constants/data.js";
+import { Input } from "../ui/input.tsx";
+import { DialogDemo } from "../dialog/Dialog.jsx"; 
+
 
 function Manage() {
+
+    const products = clothingStoreDatabase.products;
 
     return(
         
         <div className="p-6 max-w-4xl mx-auto">
         <Link to="/">Voltar</Link>
-            <p className="font-bold text-center">Meus Produtos</p>
-        <div className="flex items-center justify-between mb-2">
-            <Button>Adicionar Produto</Button>
+        <p className="font-bold text-center">Meus Produtos</p>
+        <div className="flex items-center justify-between mb-2 mt-2 max-sm:grid gap-2">
+            <form action="Search" className="flex items-center gap-2 mb-2 mt-2"> 
+                <Input type="id" placeholder="ID do Produto" />
+                <Input type="name" placeholder="Nome do Produto"/>
+                <Button type="submit" variant={"outline"}>
+                    <Search className="h-4 mr-2"/>
+                    Filtrar Resultados
+                </Button>
+            </form>
+
+
+            
+            <DialogDemo
+             title="Adicionar Produto"
+            >
+            </DialogDemo>
+            
         </div>
         <div className="border rounded-sm">
             <Table>
@@ -21,15 +44,13 @@ function Manage() {
                     <TableHead>Preço</TableHead>
                 </TableHeader>
                 <TableBody>
-                    {Array.from({ length: 10 }).map((_, index) => {
-                        return (
-                            <TableRow key={index}>
-                                <TableCell>K21i301ADaaiksdAPIh</TableCell>
-                                <TableCell>Produto {index}</TableCell>
-                                <TableCell>R$ 192,00</TableCell>
-                            </TableRow>
-                        );
-                    })}
+                    {products.map((product) => (
+                        <TableRow key={product.id}>
+                            <TableCell>{product.id}</TableCell>
+                            <TableCell>{product.name}</TableCell>
+                            <TableCell>{product.price}</TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
         </div>

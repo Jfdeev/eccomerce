@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
-import ProductCard from "./products/product.jsx";
+import ProductCard from "./productsCard/productCard.jsx";
 import { clothingStoreDatabase } from "../constants/data.js";
 
 function Prod() {
