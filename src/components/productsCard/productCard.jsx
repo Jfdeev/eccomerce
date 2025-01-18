@@ -12,7 +12,7 @@ const ProductCard = ({ title, description, price, id }) => {
 
   return (
     <div className="bg-zinc-100 p-4 rounded-lg cursor-pointer">
-      <Link to={`/product/:${id}`}>
+      <Link to={`/product/${id}`}>
       <h3 className="font-bold">{title}</h3>
       <p className="text-zinc-700">Descrição: {description}</p>
       <p className="text-zinc-900">{price}</p>
