@@ -27,7 +27,6 @@ export function DialogDemo(props) {
     setCategory(category);
   }
 
-
   const handleCategorySubmit = async () => {
     if(categoryName === '') {
       alert('Nome da Categoria não pode ser vazio');
@@ -55,11 +54,22 @@ export function DialogDemo(props) {
 
   const handleSubmit = async () => {
     try {
+      if(name === '' || description === '' || price === '' || category === '') {
+        alert('Todos os campos são obrigatórios');
+        return;
+      }
+
+      const priceValue = parseFloat(price);
+      if(isNaN(priceValue)) {
+        alert('Preço inválido');
+        return;
+      }
+
       const response = await api.post('/products', {
         name,
         description,
         price,
-        category
+        categoryId: category.id
       });
 
       if(response.status === 201) {
@@ -68,7 +78,7 @@ export function DialogDemo(props) {
 
       console.log(response.data);
     } catch (error) {
-      
+      console.log(error);
     }
   }
   if(props.title === "Adicionar Produto") {

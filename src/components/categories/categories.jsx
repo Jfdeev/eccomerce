@@ -18,13 +18,28 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-
-import { clothingStoreDatabase } from "../../constants/data.js";
+import { useEffect, useState } from "react"
+import api from "../../api/api.js";
 
 export default function ComboboxDemo({ onCategoryChange }) {
-  const categories = clothingStoreDatabase.categories;
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState("") 
+  const [categories, setCategories] = useState([])
+
+
+  const loadCategories = async () => {
+    try {
+      const response = await api.get('/categories');
+      console.log(response.data);
+      setCategories(response.data.content);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    loadCategories();
+  }, [])
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -54,6 +69,7 @@ export default function ComboboxDemo({ onCategoryChange }) {
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue)
                     setOpen(false)
+                    onCategoryChange(currentValue)
                   }}
                 >
                   {category.name} 
