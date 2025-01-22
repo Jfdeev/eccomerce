@@ -34,6 +34,11 @@ function Manage() {
              title="Adicionar Produto"
             >
             </DialogDemo>
+
+            <DialogDemo
+             title="Adicionar Categoria"
+            >
+            </DialogDemo>
             
         </div>
         <div className="border rounded-sm">

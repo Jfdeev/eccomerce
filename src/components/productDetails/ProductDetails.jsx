@@ -1,13 +1,19 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { clothingStoreDatabase } from "../../constants/data.js";
+import { useCart } from "../../constants/cartContext";
 import { Link } from "react-router-dom";
 
-const ProductDetails = () => {
+const ProductDetails = ({title, description, price, id_product}) => {
+    const { addToCart } = useCart();
     const { id } = useParams();
     const product = clothingStoreDatabase.products.find(
         (product) => product.id === parseInt(id)
     );
+
+    const handleAddToCart = () => {
+      addToCart({ title, description, price, id_product});
+    };
 
   if (!product) {
     return <div>Produto não encontrado.</div>;
@@ -22,7 +28,10 @@ const ProductDetails = () => {
         <img src={product.image} alt={product.name} className="mb-6" />
       <p className="text-gray-600 mb-2">{product.description}</p>
       <p className="font-semibold text-xl">R$ {product.price.toFixed(2)}</p>
-      <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+      <button 
+      className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+      onClick={handleAddToCart}
+      >
         Adicionar ao Carrinho
       </button>
     </div>

@@ -21,7 +21,7 @@ import {
 
 import { clothingStoreDatabase } from "../../constants/data.js";
 
-export default function ComboboxDemo() {
+export default function ComboboxDemo({ onCategoryChange }) {
   const categories = clothingStoreDatabase.categories;
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
