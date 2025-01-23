@@ -17,8 +17,14 @@ export const CartProvider = ({ children }) => {
         return cart.reduce((acc, product) => acc + product.price, 0);
     };
 
+    const updateQuantity = (productId, quantity) => {
+        setCart((prevCart) => prevCart.map((product) => {
+            product.id === productId ? { ...product, quantity } : product;
+        }));
+    }
+
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart ,getTotal }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart ,getTotal, updateQuantity }}>
             {children}
         </CartContext.Provider>
     );

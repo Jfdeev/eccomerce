@@ -64,19 +64,19 @@ export function DialogDemo(props) {
         alert('Preço inválido');
         return;
       }
+      console.log(category.id);
 
       const response = await api.post('/products', {
         name,
         description,
-        price,
+        price: priceValue,
         categoryId: category.id
       });
 
       if(response.status === 201) {
         alert('Produto Adicionado com Sucesso!');
       }
-
-      console.log(response.data);
+      
     } catch (error) {
       console.log(error);
     }

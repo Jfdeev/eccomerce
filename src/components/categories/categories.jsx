@@ -23,7 +23,7 @@ import api from "../../api/api.js";
 
 export default function ComboboxDemo({ onCategoryChange }) {
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState("") 
+  const [selectedCategory, setSelectedCategory] = useState(null)
   const [categories, setCategories] = useState([])
 
 
@@ -50,9 +50,7 @@ export default function ComboboxDemo({ onCategoryChange }) {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {value
-            ? categories.find((category) => category.name === value)?.name
-            : "Selecione Categoria"}
+          {selectedCategory ? selectedCategory.name : "Selecione Categoria"}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -66,17 +64,17 @@ export default function ComboboxDemo({ onCategoryChange }) {
                 <CommandItem
                   key={category.id}
                   value={category.name}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
+                  onSelect={() => {
+                    setSelectedCategory(category)
                     setOpen(false)
-                    onCategoryChange(currentValue)
+                    onCategoryChange(category)
                   }}
                 >
                   {category.name} 
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === category.name ? "opacity-100" : "opacity-0"
+                      selectedCategory?.id === category.id ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>

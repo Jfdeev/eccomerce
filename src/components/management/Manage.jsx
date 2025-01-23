@@ -1,17 +1,31 @@
 import React from "react";
 import { Table, TableHeader, TableHead, TableBody, TableRow, TableCell } from "../ui/table.tsx";
-import { Dialog } from "../ui/dialog.tsx";
 import { Link } from "react-router-dom";
 import { Search, PlusCircle } from "lucide-react";
 import { Button } from "../ui/button.tsx";
-import { clothingStoreDatabase } from "../../constants/data.js";
+import api from "../../api/api.js";
 import { Input } from "../ui/input.tsx";
 import { DialogDemo } from "../dialog/Dialog.jsx"; 
+import { useState, useEffect } from "react";
 
 
 function Manage() {
 
-    const products = clothingStoreDatabase.products;
+    const [products, setProducts] = useState([]);
+
+    const loadProduts = async () => {
+        try {
+            const response = await api.get('/products');
+            console.log(response.data);
+            setProducts(response.data.content);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        loadProduts();
+    }, []);
 
     return(
         

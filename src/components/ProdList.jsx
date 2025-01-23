@@ -8,10 +8,26 @@ import {
   CarouselPrevious,
 } from "./ui/carousel";
 import ProductCard from "./productsCard/productCard.jsx";
-import { clothingStoreDatabase } from "../constants/data.js";
+import api from "../api/api.js";
+import { useEffect, useState } from "react";
 
 function Prod() {
-  const products = clothingStoreDatabase.products;
+
+  const [products, setProducts] = useState([]);
+
+  const loadProduts = async () => {
+    try {
+      const response = await api.get('/products');
+      console.log(response.data);
+      setProducts(response.data.content);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    loadProduts();''
+  }, []);
 
   return (
     <section className="" id="produtos">
