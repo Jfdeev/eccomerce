@@ -6,10 +6,10 @@ import api from "../../api/api.js";
 import { useEffect, useState } from "react";
 import { ArrowLeft } from 'lucide-react';
 
-const ProductDetails = (title, description, price, id_product) => {
+const ProductDetails = () => {
     const { addToCart } = useCart();
     const { id } = useParams();
-    const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState(null);
 
     const loadProduct = async () => {
         try {
@@ -25,8 +25,14 @@ const ProductDetails = (title, description, price, id_product) => {
     }, []);
 
     const handleAddToCart = () => {
-      addToCart({ title, description, price, id: id_product });
-      console.log(title, description, price, id);
+      if(product) {
+        addToCart({
+           title: product.name,
+           description: product.description,
+           price: product.price, 
+           id: product.id 
+          });
+      }
     };
 
   if (!product) {
