@@ -7,7 +7,7 @@ import api from "../../api/api.js";
 import { Input } from "../ui/input.tsx";
 import { DialogDemo } from "../dialog/Dialog.jsx"; 
 import { useState, useEffect } from "react";
-
+import { ArrowLeft } from 'lucide-react';
 
 function Manage() {
 
@@ -30,7 +30,9 @@ function Manage() {
     return(
         
         <div className="p-6 max-w-4xl mx-auto">
-        <Link to="/">Voltar</Link>
+        <Link to="/">
+            <ArrowLeft size={24} />
+        </Link>
         <p className="font-bold text-center">Meus Produtos</p>
         <div className="flex items-center justify-between mb-2 mt-2 max-sm:grid gap-2">
             <form action="Search" className="flex items-center gap-2 mb-2 mt-2"> 

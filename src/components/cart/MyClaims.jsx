@@ -3,9 +3,10 @@ import { useCart } from "../../constants/cartContext";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api.js";
+import { ArrowLeft } from 'lucide-react';
 
 const Cart = ()  =>{
-    const { cart, getTotal, removeFromCart, updateQuantity  } = useCart();
+    const { cart, getTotal, removeFromCart, updateQuantity, setOrderData  } = useCart();
 
     const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ const Cart = ()  =>{
         const response = await api.post("/orders", orderData);
         console.log(response.data);
         navigate("/checkout");
+        setOrderData(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -37,7 +39,9 @@ const Cart = ()  =>{
 
     return (
       <div className="p-6">
-        <Link to="/">Voltar</Link>
+        <Link to="/">
+          <ArrowLeft size={24} />
+        </Link>
         <h2 className="font-bold text-center">Meus Pedidos</h2>
         {cart.length === 0 ? (
           <p className="font-bold text-center">Seu carrinho está vazio.</p>
