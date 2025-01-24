@@ -6,7 +6,8 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
 
     const addToCart = (product) => {
-        setCart((prevCart) => [...prevCart, product]);
+        const productWithQuantity = { ...product, quantity: 1 };
+        setCart((prevCart) => [...prevCart, productWithQuantity]);
     };
 
     const removeFromCart = (productId) => {
@@ -19,7 +20,7 @@ export const CartProvider = ({ children }) => {
 
     const updateQuantity = (productId, quantity) => {
         setCart((prevCart) => prevCart.map((product) => {
-            product.id === productId ? { ...product, quantity } : product;
+            return product.id === productId ? { ...product, quantity } : product;
         }));
     }
 

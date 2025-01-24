@@ -1,17 +1,27 @@
 import React from "react";
 import { useCart } from "../../constants/cartContext";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../../api/api.js";
 
 const Cart = ()  =>{
     const { cart, getTotal, removeFromCart, updateQuantity  } = useCart();
 
-    const [order, setOrder] = useState([]);
+    const navigate = useNavigate();
 
     const createOrder = async () => {
+      
+      const orderData = {
+        items: cart.map((product) => ({
+          productId: product.id,
+          quantity: product.quantity || 1,
+        })),
+      };
+
       try {
-        const response = await api.post("/orders", { cart });
-        setOrder(response.data);
+        const response = await api.post("/orders", orderData);
+        console.log(response.data);
+        navigate("/checkout");
       } catch (error) {
         console.log(error);
       }
@@ -45,7 +55,7 @@ const Cart = ()  =>{
                       className="border p-1 w-10"
                       type="number"
                       min={1}
-                      value={product.quantity}
+                      value={product.quantity || 1}
                       onChange={(e) => handleQuantityChange(product.id, e.target.value)}
                     />
                     <Link to={"/checkout"}>
